@@ -21,7 +21,13 @@ export default function Encryption(secret: string) {
 
     decrypt(ciphertext: string) {
       // REDACTED, YOU SHOULD WRITE THE CODE TO DECRYPT THE CIPHERTEXT PROVIDED HERE
-      return ''
+			const secret = getFilledSecret(this._secret);
+			const { iv, key } = getKeyAndIV(secret);
+			const decipher = crypto.createDecipheriv(this._algorithm, key, iv);
+			
+			let decoded = decipher.update(ciphertext, 'base64', 'utf8');
+      decoded += decipher.final('utf8');
+			return decoded;
     },
   }
 }

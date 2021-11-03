@@ -22,11 +22,13 @@ export default function Encryption(secret: string) {
     decrypt(ciphertext: string) {
       // REDACTED, YOU SHOULD WRITE THE CODE TO DECRYPT THE CIPHERTEXT PROVIDED HERE
 			const secret = getFilledSecret(this._secret);
-			const { iv, key } = getKeyAndIV(secret);
-			const decipher = crypto.createDecipheriv(this._algorithm, key, iv);
+			const [ encText, iv_b64 ] = ciphertext.split(':');
+			const iv = Buffer.from(iv_b64, 'base64');
+			const { key } = getKeyAndIV(secret, iv);
 			
-			let decoded = decipher.update(ciphertext, 'base64', 'utf8');
-      decoded += decipher.final('utf8');
+      const cipher = crypto.createDecipheriv(this._algorithm, key, iv);
+			let decoded = cipher.update(encText, 'base64', 'utf8');
+			decoded += cipher.final('utf8');
 			return decoded;
     },
   }

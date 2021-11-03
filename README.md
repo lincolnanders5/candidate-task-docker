@@ -2,6 +2,15 @@
 
 This is a fun little task for R&D/engineering candidates to accomplish to help us in understanding how you approach solving technical problems!
 
+# Finished Instructions
+A complete install and execution, which will run all tests and show reverse functionallity and the decrypted cyptertext:
+```bash
+git clone git@github.com:lincolnanders5/candidate-task-docker.git la-task
+cd la-task
+docker build -t r3s .
+docker run r3s
+```
+
 ## Task Requirements
 
 Ciphertext: `f78D2XXh8tnSc8a5/FE=:0LDv4U8TeV918C/NvPLOpA==`
